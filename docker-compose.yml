@@ -1,0 +1,28 @@
+version: '2'
+
+services:
+    reverseproxy:
+        build:
+            context: .
+        image: reverseproxy:1
+        container_name: reverseproxy
+        ports:
+            - 80:80
+        restart: always
+
+    server1:
+        image: nginx:alpine
+        container_name: srv1
+        restart: always
+
+    server2:
+        image: httpd:alpine
+        container_name: srv2
+        restart: always
+
+    server3:
+        image: sebp/lighttpd
+        container_name: srv3
+        restart: always
+        volumes: 
+            - ./htdocs:/var/www/localhost/htdocs
